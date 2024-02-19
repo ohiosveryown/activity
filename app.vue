@@ -1,12 +1,14 @@
 <template>
   <div>
-    <rm />
+    <!-- <rm /> -->
 
     <ul>
-      <li v-for="(artist, x) in artists" :key="x">
-        <h2>{{ artist.name }}</h2>
-        <h3>{{ artist.genre }}</h3>
-        <h4>{{ artist.country }}</h4>
+      <li v-for="(activity, x) in activities" :key="x">
+        <h2>{{ activity.date }}</h2>
+        <h3>{{ activity.type }}</h3>
+        <h4>{{ activity.distance }}</h4>
+        <h4>{{ activity.time }}</h4>
+        <img :src="`${activity.img}`" />
       </li>
     </ul>
   </div>
@@ -23,50 +25,34 @@
 
 <script>
   export default {
-    // name: "Test",
-    // data() {
-    //   return {
-    //     artists: [
-    //       { name: "Davido", genre: "afrobeats", country: "Nigeria" },
-    //       { name: "Burna Boy", genre: "afrobeats", country: "Nigeria" },
-    //       { name: "AKA", genre: "hiphop", country: "South-Africa" },
-    //       { name: "Sarkodie", genre: "hiphop", country: "Ghana" },
-    //       { name: "Stormzy", genre: "hiphop", country: "United Kingdom" },
-    //       { name: "Lil Nas", genre: "Country", country: "United States" },
-    //       { name: "Nasty C", genre: "hiphop", country: "South-Africa" },
-    //       { name: "Shatta-walle", genre: "Reagae", country: "Ghana" },
-    //       { name: "Khalid", genre: "pop", country: "United States" },
-    //       { name: "ed-Sheeran", genre: "pop", country: "United Kingdom" },
-    //     ],
-    //   }
-    // },
-
     data: () => ({
-      artists: [
-        { name: "Davido", genre: "afrobeats", country: "Nigeria" },
-        { name: "Burna Boy", genre: "afrobeats", country: "Nigeria" },
-        { name: "AKA", genre: "hiphop", country: "South-Africa" },
-        { name: "Sarkodie", genre: "hiphop", country: "Ghana" },
-        { name: "Stormzy", genre: "hiphop", country: "United Kingdom" },
-        { name: "Lil Nas", genre: "Country", country: "United States" },
-        { name: "Nasty C", genre: "hiphop", country: "South-Africa" },
-        { name: "Shatta-walle", genre: "Reagae", country: "Ghana" },
-        { name: "Khalid", genre: "pop", country: "United States" },
-        { name: "ed-Sheeran", genre: "pop", country: "United Kingdom" },
+      activities: [
+        // { name: "Davido", genre: "afrobeats", country: "Nigeria" },
+        // { name: "Burna Boy", genre: "afrobeats", country: "Nigeria" },
+        // { name: "AKA", genre: "hiphop", country: "South-Africa" },
+        // { name: "Sarkodie", genre: "hiphop", country: "Ghana" },
+        // { name: "Stormzy", genre: "hiphop", country: "United Kingdom" },
+        // { name: "Lil Nas", genre: "Country", country: "United States" },
+        // { name: "Nasty C", genre: "hiphop", country: "South-Africa" },
+        // { name: "Shatta-walle", genre: "Reagae", country: "Ghana" },
+        // { name: "Khalid", genre: "pop", country: "United States" },
+        // { name: "ed-Sheeran", genre: "pop", country: "United Kingdom" },
+
+        {
+          date: "Jan 13",
+          type: "🏃🏼‍♂️",
+          distance: "2.00 mi",
+          time: "9:26 / mi",
+          img: "/img/map@2x.png",
+        },
+        {
+          date: "Jan 28",
+          type: "🏀",
+          distance: "",
+          time: "45 min",
+          img: "/img/gym@2x.png",
+        },
       ],
     }),
   }
-
-  // export default {
-  //   data() {
-  //     return [
-  //       { name: "Tobi Lou", genre: "Rap" },
-  //       { name: "Orion Sun", genre: "R&B" },
-  //     ]
-  //   },
-  //   // data: () => ({
-  //   //   articles: null,
-  //   //   hover: false,
-  //   // }),
-  // }
 </script>
