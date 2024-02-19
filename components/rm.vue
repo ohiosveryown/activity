@@ -9,8 +9,8 @@
 
   h1 {
     color: red;
-    @include breakpoint(md) {
-      color: blue;
+    @include breakpoint(mdl) {
+      color: var(--cloud);
     }
   }
 </style>
