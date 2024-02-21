@@ -23,54 +23,39 @@
     margin-bottom: 12px;
     border-bottom: 1px solid grey;
   }
+
+  img {
+    max-width: 400px;
+  }
 </style>
 
 <script>
+  import { content, basketball } from "public/content.js"
   export default {
-    // setup() {
-    //   const myVariable = ref("Initial value")
-    //   return { myVariable }
-    // },
-
-    // data: () => ({
-    //   activities: [
-    //     {
-    //       date: "Jan 13",
-    //       type: "🏃🏼‍♂️",
-    //       distance: "2.00 mi",
-    //       time: "9:26 / mi",
-    //       img: "/img/map@2x.png",
-    //     },
-    //     {
-    //       date: "Jan 28",
-    //       type: "🏀",
-    //       distance: "",
-    //       time: "45 min",
-    //       img: "/img/gym@2x.png",
-    //     },
-    //   ],
-    // }),
-
-    data() {
-      return {
-        myVariable: "Hellooooo",
-        activities: [
-          {
-            date: "Jan 13",
-            type: "🏃🏼‍♂️",
-            distance: "2.00 mi",
-            time: "9:26 / mi",
-            img: "/img/map@2x.png",
-          },
-          {
-            date: "Jan 28",
-            type: "🏀",
-            distance: "",
-            time: "45 min",
-            img: "/img/gym@2x.png",
-          },
-        ],
-      }
-    },
+    data: () => ({
+      activities: [
+        {
+          date: "Jan 13",
+          type: content.run,
+          distance: "2.00 mi",
+          time: "9:26 / mi",
+          img: "/img/map@2x.png",
+        },
+        {
+          date: "Jan 28",
+          type: basketball.icon,
+          distance: "",
+          time: "45 min",
+          img: "/img/gym@2x.png",
+        },
+        {
+          date: "Feb 1",
+          type: content.hike,
+          distance: "",
+          time: "45 min",
+          img: basketball.bubble,
+        },
+      ],
+    }),
   }
 </script>
