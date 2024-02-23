@@ -23,23 +23,11 @@
       </li>
     </ul>
   </main>
-  <div class="bg" />
+  <bg />
 </template>
 
 <style lang="scss" scoped>
   @import "public/style/grid.scss";
-
-  .bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: var(--zmin);
-    width: 100vw;
-    height: 100vh;
-    background: url("~/public/img/bg.png") no-repeat center center;
-    background-size: cover;
-    pointer-events: none;
-  }
 
   .progress {
     width: 4px;
