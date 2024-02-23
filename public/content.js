@@ -1,5 +1,5 @@
 const basketball = {
-  icon: "🏀👍",
+  icon: "🏀",
   piedmont: "/img/gym@2x.png",
 }
 

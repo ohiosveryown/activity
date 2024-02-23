@@ -5,21 +5,47 @@
   <main>
     <ul>
       <li v-for="(activity, x) in activities" :key="x">
-        <div class="marker" />
-        <div class="content">
-          <h2>{{ activity.date }}</h2>
-          <h3>{{ activity.type }}</h3>
-          <h4>{{ activity.distance }}</h4>
-          <h4>{{ activity.time }} min</h4>
-          <img :src="`${activity.img}`" />
+        <div class="data">
+          <time>{{ activity.date }}</time>
+          <div class="category">{{ activity.category }}</div>
+          <div class="distance">{{ activity.distance }}</div>
+          <!-- <div class="duration">{{ activity.duration }} min</div> -->
         </div>
+
+        <div class="activity">
+          <div
+            class="progress"
+            :style="{ height: activity.duration * 3 + 'px' }"
+          />
+        </div>
+
+        <img :src="`${activity.img}`" />
       </li>
     </ul>
   </main>
+  <div class="bg" />
 </template>
 
 <style lang="scss" scoped>
   @import "public/style/grid.scss";
+
+  .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: var(--zmin);
+    width: 100vw;
+    height: 100vh;
+    background: url("~/public/img/bg.png") no-repeat center center;
+    background-size: cover;
+    pointer-events: none;
+  }
+
+  .progress {
+    width: 4px;
+    /* height: 100px; */
+    background: var(--oil);
+  }
 
   main {
     display: flex;
@@ -38,15 +64,39 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-content: center;
+    column-gap: 4px;
     height: 50vh;
     /* overflow: scroll; */
   }
 
   li {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+  }
+
+  .data {
+    display: flex;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+  }
+
+  .activity {
+    /* border: 1px solid pink; */
   }
 
   img {
-    max-width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: var(--z0);
+    border-radius: 20px;
+    width: 500px;
+    height: 200px;
+    object-fit: cover;
   }
 </style>
 
@@ -57,39 +107,49 @@
       activities: [
         {
           date: "Jan 1",
+          category: basketball.icon,
           img: basketball.piedmont,
           distance: "",
-          time: 26,
+          duration: 45,
         },
         {
           date: "Jan 2",
+          category: hike.icon,
           img: hike.bubble,
-          distance: "",
-          time: 45,
+          distance: 2.21,
+          duration: 120,
         },
         {
           date: "Jan 3",
+          category: run.icon,
           img: run.tribble,
-          distance: "",
-          time: 64,
+          distance: 3.12,
+          duration: 35,
         },
         {
           date: "Jan 4",
+          category: basketball.icon,
           img: basketball.piedmont,
           distance: "",
-          time: 60,
+          duration: 60,
         },
         {
           date: "Jan 5",
+          category: hike.icon,
           img: hike.bubble,
-          distance: "",
-          time: 24,
+          distance: 6.4,
+          duration: 90,
         },
         {
           date: "Jan 6",
+          category: run.icon,
           img: run.tribble,
-          distance: "",
-          time: 45,
+          distance: 1.2,
+          duration: 33,
+        },
+        {
+          date: "Jan 7",
+          duration: 10,
         },
       ],
     }),
