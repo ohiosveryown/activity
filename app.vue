@@ -2,7 +2,8 @@
   <div class="cursor"></div>
   <main>
     <ul class="">
-      <item />
+      <item v-for="activity in activities" :activity="activity" />
+      <!-- <item v-for="activity in activities" :activity="activity" :key="x" /> -->
     </ul>
   </main>
   <bg />
@@ -49,7 +50,12 @@
 
 <script>
   import { gsap } from "gsap"
+  import { activities } from "public/activity.js"
   export default {
+    data: () => ({
+      activities,
+    }),
+
     mounted() {
       const now = new Date()
       const date = now.getDate()
