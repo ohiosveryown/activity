@@ -1,4 +1,4 @@
-import { sport } from "public/content.js"
+import { sport } from "public/variables.js"
 
 export const activities = [
   {
@@ -45,14 +45,14 @@ export const activities = [
   },
   {
     date: "Jan 7",
-    duration: 10,
+    duration: 15,
     category: "",
     img: "",
     distance: "",
   },
   {
     date: "Jan 8",
-    duration: 10,
+    duration: 15,
     img: "",
     category: "",
     img: "",
@@ -60,7 +60,7 @@ export const activities = [
   },
   {
     date: "Jan 9",
-    duration: 10,
+    duration: 15,
     img: "",
     category: "",
     img: "",
@@ -68,7 +68,7 @@ export const activities = [
   },
   {
     date: "Jan 10",
-    duration: 10,
+    duration: 15,
     img: "",
     category: "",
     img: "",
@@ -76,7 +76,7 @@ export const activities = [
   },
   {
     date: "Jan 11",
-    duration: 10,
+    duration: 15,
     img: "",
     category: "",
     img: "",
@@ -84,7 +84,7 @@ export const activities = [
   },
   {
     date: "Jan 12",
-    duration: 10,
+    duration: 15,
     img: "",
     category: "",
     img: "",
@@ -95,8 +95,8 @@ export const activities = [
     duration: 200,
     distance: 6.4,
     img: "",
-    category: "",
-    img: "",
+    category: sport.run.icon,
+    img: sport.hike.bubble,
     distance: "",
   },
 ]
