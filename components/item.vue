@@ -16,8 +16,7 @@
       <div
         class="activity"
         :style="{ height: activity.duration * 0.2 + 'vh' }"
-        @mouseenter=";(hover = true), imgEnter()"
-        @mouseleave=";(hover = false), imgExit()"
+        v-on:mouseenter="imgEnter"
       />
     </div>
 
@@ -27,6 +26,7 @@
       ref="img"
       :src="`${activity.img}`"
       :alt="`${activity.category}`"
+      class="imgg"
     />
   </li>
 </template>
@@ -108,26 +108,45 @@
       },
 
       imgEnter() {
-        const img = this.$refs.img
-        console.log("img ⬅️")
-        gsap.to(img, {
-          paused: true,
-          opacity: 1,
-          duration: 1,
-          scaleY: 1,
-        })
+        this.play()
       },
 
-      imgExit() {
-        const img = this.$refs.img
-        console.log("img ➡️")
-        gsap.to(img, {
-          paused: true,
-          opacity: 0,
-          duration: 0.2,
-          scaleY: 0.2,
-        })
+      play() {
+        const image = this.$refs.img
+
+        const enter = gsap.timeline({ paused: true })
+        enter.to(".imgg", { opacity: 1 })
+
+        console.log("image ⬅️" + image)
+        // gsap.timeline(image, {
+        //   paused: true,
+        //   opacity: 1,
+        //   duration: 1,
+        //   scaleY: 1,
+        // })
       },
+
+      //       imgEnter() {
+      //         const img = this.$refs.img
+      //         console.log("img ⬅️")
+      //         gsap.to(img, {
+      //           paused: true,
+      //           opacity: 1,
+      //           duration: 1,
+      //           scaleY: 1,
+      //         })
+      //       },
+      //
+      //       imgExit() {
+      //         const img = this.$refs.img
+      //         console.log("img ➡️")
+      //         gsap.to(img, {
+      //           paused: true,
+      //           opacity: 0,
+      //           duration: 0.2,
+      //           scaleY: 0.2,
+      //         })
+      //       },
 
       // test() {
       //   return this.hover ? this.imgEnter().play() : this.imgExit().play()
