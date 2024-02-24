@@ -16,15 +16,15 @@
       <div
         class="activity"
         :style="{ height: activity.duration * 0.2 + 'vh' }"
-        @mouseenter="hover = true"
-        @mouseleave="hover = false"
+        @mouseenter=";(hover = true), imgEnter()"
+        @mouseleave=";(hover = false), imgExit()"
       />
     </div>
 
     <!-- fig -->
     <img
       v-if="activity.img"
-      :class="{ active: hover }"
+      ref="img"
       :src="`${activity.img}`"
       :alt="`${activity.category}`"
     />
@@ -88,6 +88,7 @@
 </style>
 
 <script>
+  import { gsap } from "gsap"
   export default {
     props: {
       activity: Object,
@@ -105,8 +106,35 @@
           }
         })
       },
+
+      imgEnter() {
+        const img = this.$refs.img
+        console.log("img ⬅️")
+        gsap.to(img, {
+          paused: true,
+          opacity: 1,
+          duration: 1,
+          scaleY: 1,
+        })
+      },
+
+      imgExit() {
+        const img = this.$refs.img
+        console.log("img ➡️")
+        gsap.to(img, {
+          paused: true,
+          opacity: 0,
+          duration: 0.2,
+          scaleY: 0.2,
+        })
+      },
+
+      // test() {
+      //   return this.hover ? this.imgEnter().play() : this.imgExit().play()
+      // },
     },
     mounted() {
+      // this.test()
       this.markerColor()
     },
   }
