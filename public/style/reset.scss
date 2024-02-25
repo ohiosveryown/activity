@@ -19,12 +19,15 @@
   --night: #343037;
   --charcoal: #999;
   --cloud: #f7f7f7;
+  --volt: #b2fd00;
 
   --gradientCharcoal: linear-gradient(
     180deg,
     var(--charcoal) 0%,
     var(--obsidian) 100%
   );
+
+  --gradientVolt: linear-gradient(180deg, var(--volt) 0%, var(--oil) 120%);
 
   --elevation-00: 0 2px 22px rgba(0, 0, 0, 0.16);
   --elevation-01: 0 4px 64px rgba(0, 0, 0, 0.16);

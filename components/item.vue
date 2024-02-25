@@ -12,11 +12,10 @@
     </div>
 
     <!-- marker -->
-    <div class="activity-wrapper">
+    <div ref="item" class="activity-wrapper">
       <div
         class="activity"
         :style="{ height: activity.duration * 0.2 + 'vh' }"
-        v-on:mouseenter="imgEnter"
       />
     </div>
 
@@ -26,7 +25,6 @@
       ref="img"
       :src="`${activity.img}`"
       :alt="`${activity.category}`"
-      class="imgg"
     />
   </li>
 </template>
@@ -38,6 +36,13 @@
     display: flex;
     align-items: flex-end;
     position: relative;
+    height: 100%;
+  }
+
+  .activity-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     height: 100%;
   }
 
@@ -79,7 +84,7 @@
     object-fit: cover;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
     opacity: 0;
-    transition: 300ms ease all;
+    /* transition: 300ms ease all; */
   }
 
   .active {
@@ -111,13 +116,52 @@
         this.play()
       },
 
-      play() {
+      playing() {
+        const item = this.$refs.item
         const image = this.$refs.img
 
-        const enter = gsap.timeline({ paused: true })
-        enter.to(".imgg", { opacity: 1 })
+        this.$refs.item.addEventListener("mouseenter", () => {
+          const enter = gsap.timeline({ paused: true })
+          enter.set(image, {
+            opacity: 0,
+            duration: 0.1,
+            scaleY: 0.5,
+            y: "-3rem",
+            transformOrigin: "top",
+            ease: "elastic.out(1, 0.3)",
+          })
+          enter.to(image, {
+            opacity: 1,
+            duration: 0.3,
+            scaleY: 1,
+            y: "0rem",
+            transformOrigin: "top",
+            ease: "elastic.out(1, 0.3)",
+          })
+          enter.restart()
+        })
 
-        console.log("image ⬅️" + image)
+        this.$refs.item.addEventListener("mouseleave", () => {
+          const exit = gsap.timeline({ paused: true })
+          exit.set(image, {
+            opacity: 0,
+            duration: 0.1,
+            scaleY: 0.5,
+            y: "-3rem",
+            transformOrigin: "top",
+            ease: "elastic.out(1, 0.3)",
+          })
+          exit.to(image, {
+            opacity: 0,
+            duration: 0.1,
+            scaleY: 0.5,
+            y: "0rem",
+            transformOrigin: "top",
+            ease: "elastic.out(1, 0.3)",
+          })
+          exit.restart()
+        })
+
         // gsap.timeline(image, {
         //   paused: true,
         //   opacity: 1,
@@ -155,6 +199,7 @@
     mounted() {
       // this.test()
       this.markerColor()
+      this.playing()
     },
   }
 </script>

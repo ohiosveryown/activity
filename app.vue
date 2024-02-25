@@ -2,6 +2,7 @@
   <div class="cursor"></div>
   <main>
     <ul class="">
+      <div class="marker" />
       <item v-for="activity in activities" :activity="activity" />
       <!-- <item v-for="activity in activities" :activity="activity" :key="x" /> -->
     </ul>
@@ -29,9 +30,11 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-content: center;
-    column-gap: 5px;
+    column-gap: 6px;
+    position: relative;
     margin-top: 24rem;
-    padding: 0rem 4rem;
+    /* padding: 0rem 4rem; */
+    padding: 0;
     height: 50vh;
     /* overflow: scroll; */
   }
@@ -45,6 +48,18 @@
     will-change: transform, opacity;
     /* opacity: 0;
     transform: scale(0); */
+  }
+
+  .marker {
+    position: absolute;
+    top: 0;
+    left: -120px;
+    pointer-events: none;
+    z-index: var(--zmax);
+    width: 4px;
+    height: 100%;
+    background: var(--gradientVolt);
+    opacity: 0;
   }
 </style>
 
@@ -104,6 +119,14 @@
           scale: 0,
           duration: 0.2,
         })
+
+        gsap.to(".marker", {
+          opacity: 1,
+          scale: 1,
+          duration: 0.3,
+          transformOrigin: "bottom",
+        })
+
         console.log("im in")
       }
       ul.onmouseleave = () => {
@@ -113,8 +136,37 @@
           opacity: 1,
           duration: 0.3,
         })
+
+        gsap.to(".marker", {
+          opacity: 0,
+          scale: 0,
+          duration: 0.1,
+        })
+
         console.log("im out")
       }
+
+      ul.addEventListener("mouseenter", () => {
+        console.log("I'm in")
+        gsap.set(".marker", { yPercent: 0 })
+        let xTo = gsap.quickTo(".marker", "x", {
+          x: 10,
+          // duration: .9,
+          // ease: "power4",
+          snap: {
+            x: 10,
+          },
+        })
+
+        // let yTo = gsap.quickTo(".marker", "y", {
+        //   y: 0,
+        // })
+
+        window.addEventListener("mousemove", (e) => {
+          xTo(e.clientX)
+          // yTo(240)
+        })
+      })
     },
   }
 </script>
