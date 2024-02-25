@@ -39,13 +39,17 @@
 
   .cursor {
     position: absolute;
-    top: -28px;
-    left: -22px;
+    top: 0;
+    left: 0;
     text-align: center;
-    /* transition: opacity 300ms ease; */
+    opacity: 0;
     will-change: transform, opacity;
-    /* opacity: 0;
-    transform: scale(0); */
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition-duration: 800ms;
+  }
+
+  .enter {
+    opacity: 1;
   }
 </style>
 
@@ -79,12 +83,18 @@
       const cursor = document.querySelector(".cursor")
       cursor.innerText = month + " " + date
 
-      let xTo = gsap.quickTo(cursor, "x", { duration: 0.6, ease: "power3" }),
-        yTo = gsap.quickTo(cursor, "y", { duration: 0.6, ease: "power3" })
-
-      window.addEventListener("mousemove", (e) => {
-        xTo(e.clientX)
-        yTo(e.clientY)
+      document.addEventListener("mousemove", (e) => {
+        cursor.setAttribute(
+          "style",
+          `transform: translate(${e.pageX - 22}px, ${e.pageY - 28}px)`
+        )
+        const threshold = 2
+        if (event.clientY > threshold) {
+          setTimeout(() => {
+            cursor.classList.add("enter")
+            console.log("Delayed for x second.")
+          }, "500")
+        }
       })
     },
   }

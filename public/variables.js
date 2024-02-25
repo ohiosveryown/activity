@@ -12,4 +12,7 @@ export const sport = {
     icon: "🏔️",
     bubble: "/img/bubble.jpeg",
   },
+  rest: {
+    icon: "🔋",
+  },
 }

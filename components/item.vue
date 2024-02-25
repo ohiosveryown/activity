@@ -45,13 +45,15 @@
       enter() {
         const li = this.$refs.li
         const marker = this.$refs.marker
+        const height = this.activity.duration * 0.2 + "vh"
 
         li.onmouseover = () => {
-          marker.style.height = "100%"
+          marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
         }
 
         li.onmouseleave = () => {
-          marker.style.height = `${this.activity.duration * 0.2 + "vh"}`
+          marker.style.height = `${height}`
+          marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
         }
       },
     },
