@@ -93,16 +93,6 @@
       const cursor = document.querySelector(".cursor")
       cursor.innerText = month + " " + date
 
-      // gsap.fromTo(cursor, { scale: 0 }, { scale: 1, duration: 0.3, delay: 2 })
-
-      // document.addEventListener("mousemove", (e) => {
-      //   gsap.to(cursor, {
-      //     x: e.clientX,
-      //     y: e.clientY,
-      //     stagger: -0.02,
-      //   })
-      // })
-
       let xTo = gsap.quickTo(cursor, "x", { duration: 0.6, ease: "power3" }),
         yTo = gsap.quickTo(cursor, "y", { duration: 0.6, ease: "power3" })
 
