@@ -1,7 +1,12 @@
 <template>
-  <div class="cursor"></div>
+  <div ref="cursor" :class="{ active: hover }" class="cursor" />
   <main>
-    <ul class="debug">
+    <ul
+      ref="ul"
+      class=""
+      @mouseenter="hover = true"
+      @mouseleave="hover = false"
+    >
       <item v-for="activity in activities" :activity="activity" />
     </ul>
   </main>
@@ -31,6 +36,7 @@
     /* column-gap: 6px; */
     position: relative;
     margin-top: 24rem;
+    padding-top: 2.4rem;
     /* padding: 0rem 4rem; */
     padding: 0;
     height: 50vh;
@@ -42,14 +48,24 @@
     top: 0;
     left: 0;
     text-align: center;
-    opacity: 0;
+    /* opacity: 0; */
     will-change: transform, opacity;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
     transition-duration: 800ms;
+    /* animation: enter 300ms ease forwards 500ms; */
   }
 
-  .enter {
-    opacity: 1;
+  @keyframes enter {
+    from {
+      opcity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .active {
+    opacity: 0;
   }
 </style>
 
@@ -59,9 +75,28 @@
   export default {
     data: () => ({
       activities,
+      hover: false,
     }),
 
+    methods: {
+      //       handleCursor() {
+      //         const ul = this.$refs.ul
+      //         const cursor = this.$refs.cursor
+      //
+      //         hiding = () => {
+      //           cursor.style = "opacity: 0"
+      //           console.log("cursor should be 0")
+      //         }
+      //
+      //         showing = () => {
+      //           cursor.style = "opacity: 1"
+      //           console.log("cursor should be 1")
+      //         }
+      //       },
+    },
+
     mounted() {
+      // this.handleCursor()
       const now = new Date()
       const date = now.getDate()
       const months = [
@@ -88,13 +123,6 @@
           "style",
           `transform: translate(${e.pageX - 22}px, ${e.pageY - 28}px)`
         )
-        const threshold = 2
-        if (event.clientY > threshold) {
-          setTimeout(() => {
-            cursor.classList.add("enter")
-            console.log("Delayed for x second.")
-          }, "500")
-        }
       })
     },
   }

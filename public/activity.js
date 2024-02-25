@@ -46,7 +46,7 @@ export const activities = [
   {
     date: "Jan 7",
     duration: 15,
-    category: "",
+    category: sport.rest.icon,
     img: "",
     distance: "",
   },

@@ -32,6 +32,12 @@
     width: 3px;
     background: var(--gradientCharcoal);
   }
+
+  footer {
+    position: absolute;
+    bottom: -2.4rem;
+    width: max-content;
+  }
 </style>
 
 <script>
@@ -52,7 +58,6 @@
         }
 
         li.onmouseleave = () => {
-          marker.style.height = `${height}`
           marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
         }
       },
