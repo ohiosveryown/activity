@@ -27,7 +27,7 @@ export const activities = [
     duration: 60,
     category: sport.basketball.icon,
     img: sport.basketball.piedmont,
-    distance: "",
+    distance: "60 min",
   },
   {
     date: "Jan 5",
