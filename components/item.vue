@@ -80,8 +80,11 @@
         const header = this.$refs.header
         const footer = this.$refs.footer
         const height = this.activity.duration * 0.2 + "vh"
+
         //         marker.style.cssText = isHovering
         //           ? `height: 100%; background: var(--gradientVolt);`
+        //           : marker.offsetHeight < 30
+        //           ? `height: ${height}; background: var(--night);`
         //           : `height: ${height}; background: var(--gradientCharcoal);`
         //
         //         footer.style.cssText = isHovering
