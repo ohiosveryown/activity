@@ -1,5 +1,5 @@
 <template>
-  <li ref="li" class="">
+  <li ref="li" @mouseenter="hovering" @mouseleave="notHovering" class="">
     <header>
       <div class="category" v-if="activity.category">
         {{ activity.category }}
@@ -60,17 +60,31 @@
         const marker = this.$refs.marker
         const height = this.activity.duration * 0.2 + "vh"
 
-        li.onmouseover = () => {
-          marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
-        }
+        //         li.onmouseover = () => {
+        //           marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
+        //         }
+        //
+        //         li.onmouseleave = () => {
+        //           marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
+        //         }
+      },
 
-        li.onmouseleave = () => {
-          marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
-        }
+      hovering() {
+        const marker = this.$refs.marker
+        const height = this.activity.duration * 0.2 + "vh"
+        marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
+      },
+
+      notHovering() {
+        const marker = this.$refs.marker
+        const height = this.activity.duration * 0.2 + "vh"
+        marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
       },
     },
     mounted() {
       this.enter()
+      this.hovering()
+      this.notHovering()
     },
   }
 </script>
