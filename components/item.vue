@@ -26,10 +26,17 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    padding: 0 0.4rem;
+  }
+
+  header {
+    position: absolute;
+    top: -2.4rem;
   }
 
   .marker {
-    width: 3px;
+    border-radius: 5px;
+    width: 4px;
     background: var(--gradientCharcoal);
   }
 
