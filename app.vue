@@ -37,8 +37,6 @@
     margin-top: 24rem;
     padding: 0rem 4rem;
     height: 50vh;
-    /* overflow: scroll; */
-
     cursor: cell;
     /* cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png"),
       auto; */
