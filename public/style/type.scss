@@ -1,19 +1,18 @@
 @import "~/public/style/grid.scss";
 
-// @font-face {
-// 	font-family: "neuebit";
-// 	src: url("~/static/type/neuebit.woff2") format("woff2");
-// 	font-display: block;
-// }
-//
-// @font-face {
-// 	font-family: "canela";
-// 	src: url("~/static/type/canela.woff2") format("woff2");
-// 	font-display: block;
-// }
+@font-face {
+  font-family: "mono";
+  src: url("~/public/type/mono.woff2") format("woff2");
+  font-display: block;
+}
+
 //
 // .neuebit { font-family: 'neuebit', var(--system-ui); letter-spacing: -.25px; }
 // .canela { font-family: 'canela', var(--system-ui); }
+
+.mono {
+  font-family: "mono", "Courier New", Courier, monospace;
+}
 
 .uc {
   text-transform: uppercase;

@@ -1,5 +1,5 @@
 <template>
-  <div ref="cursor" :class="{ active: hover }" class="cursor" />
+  <div ref="cursor" :class="{ active: hover }" class="cursor mono" />
   <main>
     <ul
       ref="ul"
@@ -22,7 +22,7 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
-    padding: 0 12rem;
+    padding: 0 8rem;
     height: 100vh;
     overflow-x: auto;
   }
@@ -33,14 +33,15 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-content: center;
-    /* column-gap: 6px; */
     position: relative;
     margin-top: 24rem;
-    padding-top: 2.4rem;
-    /* padding: 0rem 4rem; */
-    padding: 0;
+    padding: 0rem 4rem;
     height: 50vh;
     /* overflow: scroll; */
+
+    cursor: cell;
+    /* cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png"),
+      auto; */
   }
 
   .cursor {
@@ -48,11 +49,12 @@
     top: 0;
     left: 0;
     text-align: center;
-    /* opacity: 0; */
-    will-change: transform, opacity;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-size: 1.4rem;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
     transition-duration: 800ms;
-    /* animation: enter 300ms ease forwards 500ms; */
+    will-change: transform, opacity;
   }
 
   @keyframes enter {
@@ -70,7 +72,6 @@
 </style>
 
 <script>
-  import { gsap } from "gsap"
   import { activities } from "public/activity.js"
   export default {
     data: () => ({
@@ -79,51 +80,30 @@
     }),
 
     methods: {
-      //       handleCursor() {
-      //         const ul = this.$refs.ul
-      //         const cursor = this.$refs.cursor
-      //
-      //         hiding = () => {
-      //           cursor.style = "opacity: 0"
-      //           console.log("cursor should be 0")
-      //         }
-      //
-      //         showing = () => {
-      //           cursor.style = "opacity: 1"
-      //           console.log("cursor should be 1")
-      //         }
-      //       },
+      handleCursor() {
+        // date logic
+        const now = new Date()
+        const date = now.getDate()
+        const months = Array.from({ length: 12 }, (v, i) => {
+          return new Date(0, i).toLocaleString("en-US", { month: "short" })
+        })
+
+        const month = months[now.getMonth()]
+        const cursor = this.$refs.cursor
+        cursor.innerText = month + " " + date
+
+        // follow logic
+        document.addEventListener("mousemove", (e) => {
+          cursor.setAttribute(
+            "style",
+            `transform: translate(${e.pageX - 22}px, ${e.pageY - 28}px)`
+          )
+        })
+      },
     },
 
     mounted() {
-      // this.handleCursor()
-      const now = new Date()
-      const date = now.getDate()
-      const months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ]
-      const month = months[now.getMonth()]
-
-      const cursor = document.querySelector(".cursor")
-      cursor.innerText = month + " " + date
-
-      document.addEventListener("mousemove", (e) => {
-        cursor.setAttribute(
-          "style",
-          `transform: translate(${e.pageX - 22}px, ${e.pageY - 28}px)`
-        )
-      })
+      this.handleCursor()
     },
   }
 </script>
