@@ -1,5 +1,10 @@
 <template>
-  <li ref="li" @mouseenter="hovering" @mouseleave="notHovering" class="">
+  <li
+    ref="li"
+    class=""
+    @mouseenter="handleHover(true)"
+    @mouseleave="handleHover(false)"
+  >
     <header>
       <div class="category" v-if="activity.category">
         {{ activity.category }}
@@ -55,36 +60,16 @@
     },
     data: () => ({}),
     methods: {
-      enter() {
-        const li = this.$refs.li
+      handleHover(isHovering) {
         const marker = this.$refs.marker
         const height = this.activity.duration * 0.2 + "vh"
-
-        //         li.onmouseover = () => {
-        //           marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
-        //         }
-        //
-        //         li.onmouseleave = () => {
-        //           marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
-        //         }
-      },
-
-      hovering() {
-        const marker = this.$refs.marker
-        const height = this.activity.duration * 0.2 + "vh"
-        marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
-      },
-
-      notHovering() {
-        const marker = this.$refs.marker
-        const height = this.activity.duration * 0.2 + "vh"
-        marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
+        if (isHovering) {
+          marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
+        } else {
+          marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
+        }
       },
     },
-    mounted() {
-      this.enter()
-      this.hovering()
-      this.notHovering()
-    },
+    mounted() {},
   }
 </script>
