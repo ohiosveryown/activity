@@ -92,12 +92,4 @@ export const activities = [
     img: sport.hike.bubble,
     distance: "",
   },
-  {
-    date: "Dec 31",
-    duration: "",
-    distance: "",
-    category: sport.rest.icon,
-    img: sport.rest.empty,
-    distance: "",
-  },
 ]
