@@ -113,20 +113,6 @@
 
         const height = this.activity.duration * 0.2 + "vh"
 
-        //         marker.style.cssText = isHovering
-        //           ? `height: 100%; background: var(--gradientVolt);`
-        //           : marker.offsetHeight < 30
-        //           ? `height: ${height}; background: var(--night);`
-        //           : `height: ${height}; background: var(--gradientCharcoal);`
-        //
-        //         footer.style.cssText = isHovering
-        //           ? `opacity: 1; transform: scale(1);`
-        //           : `opacity: 0; transform: scale(.9);`
-        //
-        //         header.style.cssText = isHovering
-        //           ? `opacity: 1; transform: scale(1);`
-        //           : `opacity: 0; transform: scale(.9);`
-
         if (isHovering) {
           marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
           header.style.cssText = `opacity: 1; transform: scale(1);`
