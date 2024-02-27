@@ -92,4 +92,32 @@ export const activities = [
     img: sport.hike.bubble,
     distance: "",
   },
+  {
+    date: "Jan 14",
+    duration: 150,
+    distance: 63.2,
+    category: sport.basketball.icon,
+    img: sport.basketball.piedmont,
+    distance: "",
+  },
 ]
+
+let startDate = new Date() // current date
+startDate.setMonth(0) // setting month to January
+startDate.setDate(15) // setting day to 14
+
+while (startDate.getFullYear() === new Date().getFullYear()) {
+  // check if the current year is the same
+  activities.push({
+    date: startDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    }), // format date to 'MMM d'
+    duration: 15,
+    category: sport.rest.icon,
+    img: sport.rest.empty,
+    distance: "",
+  })
+
+  startDate.setDate(startDate.getDate() + 1)
+}

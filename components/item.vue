@@ -38,7 +38,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding: 0 0.4rem;
+    padding: 0 0.2rem;
   }
 
   .background {
@@ -74,7 +74,7 @@
 
   .marker {
     border-radius: 5px;
-    width: 5px;
+    width: 4px;
     background: var(--gradientCharcoal);
   }
 
