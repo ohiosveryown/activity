@@ -6,21 +6,22 @@ export const activities = [
     duration: 45,
     category: sport.basketball.icon,
     img: sport.basketball.piedmont,
-    distance: "",
+    distance: "45 min",
   },
   {
     date: "Jan 2",
     duration: 120,
     category: sport.hike.icon,
     img: sport.hike.bubble,
-    distance: 2.21,
+    distance: "2.21 mi",
   },
   {
     date: "Jan 3",
     duration: 35,
     category: sport.run.icon,
     img: sport.run.tribble,
-    distance: 3.12,
+    distance: "3.12 mi",
+    pace: "9:30",
   },
   {
     date: "Jan 4",
@@ -34,14 +35,15 @@ export const activities = [
     duration: 90,
     category: sport.hike.icon,
     img: sport.hike.bubble,
-    distance: 6.4,
+    distance: "6.4 mi",
   },
   {
     date: "Jan 6",
     duration: 33,
     category: sport.run.icon,
     img: sport.run.tribble,
-    distance: 1.2,
+    distance: "1.2 mi",
+    pace: "9:01",
   },
   {
     date: "Jan 7",
@@ -90,7 +92,8 @@ export const activities = [
     distance: 6.4,
     category: sport.run.icon,
     img: sport.hike.bubble,
-    distance: "",
+    distance: "6.4 mi",
+    pace: "9:30",
   },
   {
     date: "Jan 14",
@@ -98,7 +101,7 @@ export const activities = [
     distance: 63.2,
     category: sport.basketball.icon,
     img: sport.basketball.piedmont,
-    distance: "",
+    distance: "63 min",
   },
 ]
 

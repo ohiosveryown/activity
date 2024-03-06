@@ -5,12 +5,14 @@
     @mouseenter="handleHover(true)"
     @mouseleave="handleHover(false)"
   >
-    <img
-      v-if="activity.img"
-      ref="background"
-      class="background"
-      :src="activity.img"
-    />
+    <div ref="background" class="meta">
+      <div class="meta-wrapper">
+        <img v-if="activity.img" class="background" :src="activity.img" />
+        <ul class="meta-info">
+          <li class="sans" v-if="activity.distance">{{ activity.distance }}</li>
+        </ul>
+      </div>
+    </div>
 
     <header class="mono" ref="header">
       <div class="category" v-if="activity.category">
@@ -33,6 +35,17 @@
 <style lang="scss" scoped>
   @import "public/style/grid.scss";
 
+  .sans {
+    font-size: 8rem;
+    background: linear-gradient(
+      180deg,
+      var(--cloud) 32%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   li {
     display: flex;
     flex-direction: column;
@@ -41,35 +54,57 @@
     padding: 0 0.2rem;
   }
 
-  .background {
+  .meta {
     position: fixed;
     z-index: var(--z0);
     top: 3.2rem;
     left: 0;
     right: 0;
     margin: 0 auto;
+  }
+
+  .meta-wrapper {
+    position: relative;
+  }
+
+  .meta-info {
+    position: absolute;
+    bottom: -20rem;
+    left: 0;
+    right: 0;
+  }
+
+  .background {
+    /* position: fixed;
+    z-index: var(--z0);
+    top: 3.2rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto; */
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
     border-radius: 5px;
     min-width: 52rem;
     width: 42vw;
-    height: 28dvh;
+    height: 24dvh;
     max-height: 25rem;
     background: none;
     overflow: hidden;
     pointer-events: none;
     object-fit: cover;
-    mask-image: linear-gradient(to top, transparent 5%, white 100%);
-    opacity: 0;
+    mask-image: linear-gradient(to top, transparent 24%, white 100%);
+    /* opacity: 0; */
     transform: scale(0.9);
     transform-origin: top;
-    transition: opacity 200ms ease, transform 300ms ease;
   }
 
   header {
     position: absolute;
     top: -2.8rem;
     opacity: 0;
-    transform: scale(0.4);
-    transition: opacity 300ms ease, transform 300ms ease;
   }
 
   .marker {
@@ -117,7 +152,7 @@
           marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
           header.style.cssText = `opacity: 1; transform: scale(1);`
           footer.style.cssText = `opacity: 1; transform: scale(1);`
-          background.style.cssText = `opacity: 1; transform: scale(1);`
+          background.style.cssText = `opacity: 1; transform: scale(1); transition: all 800ms ease`
         } else {
           marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
           header.style.cssText = `opacity: 0; transform: scale(.4);`
