@@ -1,205 +1,171 @@
 <template>
-  <li>
-    <!-- content -->
-    <div class="data" :class="{ active: hover }">
-      <time>{{ activity.date }}</time>
+  <li
+    ref="li"
+    class=""
+    @mouseenter="handleHover(true)"
+    @mouseleave="handleHover(false)"
+  >
+    <div ref="background" class="meta">
+      <div class="meta-wrapper">
+        <img v-if="activity.img" class="background" :src="activity.img" />
+        <ul class="meta-info">
+          <li class="sans" v-if="activity.distance">{{ activity.distance }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <header class="mono" ref="header">
       <div class="category" v-if="activity.category">
-        {{ activity.category }}
+        <img :src="activity.category" />
       </div>
-      <div class="distance" v-if="activity.distance">
-        {{ activity.distance }} mi
-      </div>
-    </div>
+    </header>
 
-    <!-- marker -->
-    <div ref="item" class="activity-wrapper">
-      <div
-        class="activity"
-        :style="{ height: activity.duration * 0.2 + 'vh' }"
-      />
-    </div>
-
-    <!-- fig -->
-    <img
-      v-if="activity.img"
-      ref="img"
-      :src="`${activity.img}`"
-      :alt="`${activity.category}`"
+    <div
+      ref="marker"
+      class="marker"
+      :style="{ height: activity.duration * 0.2 + 'vh' }"
     />
+
+    <footer class="mono" ref="footer">
+      {{ activity.date }}
+    </footer>
   </li>
 </template>
 
 <style lang="scss" scoped>
   @import "public/style/grid.scss";
 
-  li {
-    display: flex;
-    align-items: flex-end;
-    position: relative;
-    height: 100%;
+  .sans {
+    font-size: 8rem;
+    background: linear-gradient(
+      180deg,
+      var(--cloud) 32%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .activity-wrapper {
+  li {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 100%;
+    align-items: center;
+    padding: 0 0.2rem;
   }
 
-  .activity {
-    width: 4px;
-    border-radius: 88px;
-    background: var(--night);
-  }
-
-  /* .data {
-    display: flex;
+  .meta {
     position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -20%);
-    opacity: 0;
-  } */
-
-  .data {
-    display: flex;
-    position: absolute;
-    top: 0;
+    z-index: var(--z0);
+    top: 3.2rem;
     left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .meta-wrapper {
+    position: relative;
+  }
+
+  .meta-info {
+    position: absolute;
+    bottom: -20rem;
+    left: 0;
+    right: 0;
+  }
+
+  .background {
+    /* position: fixed;
+    z-index: var(--z0);
+    top: 3.2rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto; */
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 5px;
+    min-width: 52rem;
+    width: 42vw;
+    height: 24dvh;
+    max-height: 25rem;
+    background: none;
+    overflow: hidden;
+    pointer-events: none;
+    object-fit: cover;
+    mask-image: linear-gradient(to top, transparent 24%, white 100%);
+    /* opacity: 0; */
+    transform: scale(0.9);
+    transform-origin: top;
+  }
+
+  header {
+    position: absolute;
+    top: -2.8rem;
+    opacity: 0;
+  }
+
+  .marker {
+    border-radius: 5px;
+    width: 4px;
+    background: var(--gradientCharcoal);
+  }
+
+  footer {
+    position: absolute;
+    bottom: -2.4rem;
     width: max-content;
     opacity: 0;
-  }
-
-  img {
-    position: fixed;
-    top: 4rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: var(--z0);
-    /* border-radius: 20px; */
-    min-width: 52rem;
-    width: 40vw;
-    max-height: 25rem;
-    height: 26vh;
-    object-fit: cover;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
-    opacity: 0;
-    /* transition: 300ms ease all; */
-  }
-
-  .active {
-    opacity: 1;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-size: 1.4rem;
+    transform: scale(0.9);
+    transition: opacity 200ms ease, transform 300ms ease;
   }
 </style>
 
 <script>
-  import { gsap } from "gsap"
   export default {
     props: {
       activity: Object,
     },
-    data: () => ({
-      hover: false,
-    }),
+    data: () => ({}),
     methods: {
       markerColor() {
-        const activity = document.querySelectorAll(".activity")
+        const marker = this.$refs.marker
+        if (marker.offsetHeight < 30) {
+          marker.style.background = "var(--night)"
+        }
+      },
 
-        activity.forEach((entry) => {
-          if (entry.offsetHeight > 30) {
-            entry.style.background = "var(--gradientCharcoal)"
+      handleHover(isHovering, inputDate) {
+        const marker = this.$refs.marker
+        const header = this.$refs.header
+        const footer = this.$refs.footer
+        const background = this.$refs.background
+
+        const height = this.activity.duration * 0.2 + "vh"
+
+        if (isHovering) {
+          marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
+          header.style.cssText = `opacity: 1; transform: scale(1);`
+          footer.style.cssText = `opacity: 1; transform: scale(1);`
+          background.style.cssText = `opacity: 1; transform: scale(1); transition: all 800ms ease`
+        } else {
+          marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
+          header.style.cssText = `opacity: 0; transform: scale(.4);`
+          footer.style.cssText = `opacity: 0; transform: scale(.9);`
+          background.style.cssText = `opacity: 0; transform: scale(.9);`
+          if (marker.offsetHeight < 30) {
+            marker.style.background = "var(--night)"
           }
-        })
+        }
       },
-
-      imgEnter() {
-        this.play()
-      },
-
-      playing() {
-        const item = this.$refs.item
-        const image = this.$refs.img
-
-        this.$refs.item.addEventListener("mouseenter", () => {
-          const enter = gsap.timeline({ paused: true })
-          enter.set(image, {
-            opacity: 0,
-            duration: 0.1,
-            scaleY: 0.5,
-            y: "-3rem",
-            transformOrigin: "top",
-            ease: "elastic.out(1, 0.3)",
-          })
-          enter.to(image, {
-            opacity: 1,
-            duration: 0.3,
-            scaleY: 1,
-            y: "0rem",
-            transformOrigin: "top",
-            ease: "elastic.out(1, 0.3)",
-          })
-          enter.restart()
-        })
-
-        this.$refs.item.addEventListener("mouseleave", () => {
-          const exit = gsap.timeline({ paused: true })
-          exit.set(image, {
-            opacity: 0,
-            duration: 0.1,
-            scaleY: 0.5,
-            y: "-3rem",
-            transformOrigin: "top",
-            ease: "elastic.out(1, 0.3)",
-          })
-          exit.to(image, {
-            opacity: 0,
-            duration: 0.1,
-            scaleY: 0.5,
-            y: "0rem",
-            transformOrigin: "top",
-            ease: "elastic.out(1, 0.3)",
-          })
-          exit.restart()
-        })
-
-        // gsap.timeline(image, {
-        //   paused: true,
-        //   opacity: 1,
-        //   duration: 1,
-        //   scaleY: 1,
-        // })
-      },
-
-      //       imgEnter() {
-      //         const img = this.$refs.img
-      //         console.log("img ⬅️")
-      //         gsap.to(img, {
-      //           paused: true,
-      //           opacity: 1,
-      //           duration: 1,
-      //           scaleY: 1,
-      //         })
-      //       },
-      //
-      //       imgExit() {
-      //         const img = this.$refs.img
-      //         console.log("img ➡️")
-      //         gsap.to(img, {
-      //           paused: true,
-      //           opacity: 0,
-      //           duration: 0.2,
-      //           scaleY: 0.2,
-      //         })
-      //       },
-
-      // test() {
-      //   return this.hover ? this.imgEnter().play() : this.imgExit().play()
-      // },
     },
     mounted() {
-      // this.test()
       this.markerColor()
-      this.playing()
     },
   }
 </script>

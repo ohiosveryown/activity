@@ -1,10 +1,13 @@
 <template>
-  <div class="cursor"></div>
+  <div ref="cursor" :class="{ active: hover }" class="cursor mono" />
   <main>
-    <ul class="">
-      <div class="marker" />
+    <ul
+      ref="ul"
+      class=""
+      @mouseenter="hover = true"
+      @mouseleave="hover = false"
+    >
       <item v-for="activity in activities" :activity="activity" />
-      <!-- <item v-for="activity in activities" :activity="activity" :key="x" /> -->
     </ul>
   </main>
   <bg />
@@ -19,7 +22,7 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
-    padding: 0 12rem;
+    padding: 0 8rem;
     height: 100vh;
     overflow-x: auto;
   }
@@ -30,143 +33,75 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-content: center;
-    column-gap: 6px;
     position: relative;
     margin-top: 24rem;
-    /* padding: 0rem 4rem; */
-    padding: 0;
+    padding: 0rem 4rem;
     height: 50vh;
-    /* overflow: scroll; */
+    cursor: cell;
+    /* cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png"),
+      auto; */
   }
 
   .cursor {
     position: absolute;
-    top: -28px;
-    left: -22px;
+    top: 0;
+    left: 0;
     text-align: center;
-    /* transition: opacity 300ms ease; */
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-size: 1.4rem;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition-duration: 800ms;
     will-change: transform, opacity;
-    /* opacity: 0;
-    transform: scale(0); */
   }
 
-  .marker {
-    position: absolute;
-    top: 0;
-    left: -120px;
-    pointer-events: none;
-    z-index: var(--zmax);
-    width: 4px;
-    height: 100%;
-    background: var(--gradientVolt);
+  @keyframes enter {
+    from {
+      opcity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .active {
     opacity: 0;
   }
 </style>
 
 <script>
-  import { gsap } from "gsap"
   import { activities } from "public/activity.js"
   export default {
     data: () => ({
       activities,
+      hover: false,
     }),
 
+    methods: {
+      handleCursor() {
+        // date logic
+        const now = new Date()
+        const date = now.getDate()
+        const months = Array.from({ length: 12 }, (v, i) => {
+          return new Date(0, i).toLocaleString("en-US", { month: "short" })
+        })
+
+        const month = months[now.getMonth()]
+        const cursor = this.$refs.cursor
+        cursor.innerText = month + " " + date
+
+        // follow logic
+        document.addEventListener("mousemove", (e) => {
+          cursor.setAttribute(
+            "style",
+            `transform: translate(${e.pageX - 22}px, ${e.pageY - 28}px)`
+          )
+        })
+      },
+    },
+
     mounted() {
-      const now = new Date()
-      const date = now.getDate()
-      const months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ]
-      const month = months[now.getMonth()]
-
-      const cursor = document.querySelector(".cursor")
-      cursor.innerText = month + " " + date
-
-      // gsap.fromTo(cursor, { scale: 0 }, { scale: 1, duration: 0.3, delay: 2 })
-
-      // document.addEventListener("mousemove", (e) => {
-      //   gsap.to(cursor, {
-      //     x: e.clientX,
-      //     y: e.clientY,
-      //     stagger: -0.02,
-      //   })
-      // })
-
-      let xTo = gsap.quickTo(cursor, "x", { duration: 0.6, ease: "power3" }),
-        yTo = gsap.quickTo(cursor, "y", { duration: 0.6, ease: "power3" })
-
-      window.addEventListener("mousemove", (e) => {
-        xTo(e.clientX)
-        yTo(e.clientY)
-      })
-
-      const ul = document.querySelector("ul")
-      ul.onmouseenter = () => {
-        gsap.to(cursor, {
-          paused: false,
-          opacity: 0,
-          scale: 0,
-          duration: 0.2,
-        })
-
-        gsap.to(".marker", {
-          opacity: 1,
-          scale: 1,
-          duration: 0.3,
-          transformOrigin: "bottom",
-        })
-
-        console.log("im in")
-      }
-      ul.onmouseleave = () => {
-        gsap.to(cursor, {
-          paused: false,
-          scale: 1,
-          opacity: 1,
-          duration: 0.3,
-        })
-
-        gsap.to(".marker", {
-          opacity: 0,
-          scale: 0,
-          duration: 0.1,
-        })
-
-        console.log("im out")
-      }
-
-      ul.addEventListener("mouseenter", () => {
-        console.log("I'm in")
-        gsap.set(".marker", { yPercent: 0 })
-        let xTo = gsap.quickTo(".marker", "x", {
-          x: 10,
-          // duration: .9,
-          // ease: "power4",
-          snap: {
-            x: 10,
-          },
-        })
-
-        // let yTo = gsap.quickTo(".marker", "y", {
-        //   y: 0,
-        // })
-
-        window.addEventListener("mousemove", (e) => {
-          xTo(e.clientX)
-          // yTo(240)
-        })
-      })
+      this.handleCursor()
     },
   }
 </script>
