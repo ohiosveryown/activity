@@ -7,7 +7,15 @@
   >
     <div ref="background" class="meta">
       <div class="meta-wrapper">
-        <img v-if="activity.img" class="background" :src="activity.img" />
+        <!-- <img v-if="activity.img" class="background" :src="activity.img" /> -->
+
+        <NuxtImg
+          v-if="activity.img"
+          class="background"
+          :src="activity.img"
+          quality="80"
+        />
+
         <ul class="meta-info">
           <li class="sans" v-if="activity.distance">{{ activity.distance }}</li>
         </ul>
@@ -86,7 +94,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     min-width: 52rem;
     width: 42vw;
     height: 24dvh;

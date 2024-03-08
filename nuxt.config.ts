@@ -8,4 +8,6 @@ export default defineNuxtConfig({
     "~/public/style/type.scss",
     "~/public/style/util.scss",
   ],
+
+  modules: ["@nuxt/image"],
 })
