@@ -41,7 +41,7 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "public/style/grid.scss";
+  @import "public/assets/style/grid.scss";
 
   .sans {
     font-size: 8rem;

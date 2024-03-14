@@ -4,9 +4,9 @@ export default defineNuxtConfig({
 
   // global styles
   css: [
-    "~/public/style/reset.scss",
-    "~/public/style/type.scss",
-    "~/public/style/util.scss",
+    "~/public/assets/style/reset.scss",
+    "~/public/assets/style/type.scss",
+    "~/public/assets/style/util.scss",
   ],
 
   modules: ["@nuxt/image"],
