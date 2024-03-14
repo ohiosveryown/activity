@@ -1,4 +1,5 @@
 <template>
+  <img src="/rm/tree.png" alt="" />
   <div ref="cursor" :class="{ active: hover }" class="cursor mono" />
   <main>
     <ul
