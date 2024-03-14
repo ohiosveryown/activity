@@ -10,10 +10,10 @@
         <!-- <img v-if="activity.img" class="background" :src="activity.img" /> -->
 
         <NuxtImg
-          v-if="activity.img"
+          provider="imagekit"
           class="background"
+          v-if="activity.img"
           :src="activity.img"
-          quality="80"
         />
 
         <ul class="meta-info">
@@ -41,7 +41,7 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "public/assets/style/grid.scss";
+  @import "/assets/style/grid.scss";
 
   .sans {
     font-size: 8rem;

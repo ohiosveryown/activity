@@ -1,6 +1,4 @@
 <template>
-  <img src="/rm/tree.png" alt="" />
-
   <div ref="cursor" :class="{ active: hover }" class="cursor mono" />
   <main>
     <ul
@@ -16,13 +14,7 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "public/assets/style/grid.scss";
-
-  .logo {
-    position: fixed;
-    left: 40vw;
-    top: 40vh;
-  }
+  @import "/assets/style/grid.scss";
 
   main {
     display: flex;
@@ -78,7 +70,7 @@
 </style>
 
 <script>
-  import { activities } from "public/activity.js"
+  import { activities } from "assets/logic/activity.js"
   export default {
     data: () => ({
       activities,
