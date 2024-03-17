@@ -3,14 +3,14 @@
   <main>
     <ul
       ref="ul"
-      class=""
+      class="days"
       @mouseenter="hover = true"
       @mouseleave="hover = false"
     >
-      <item v-for="activity in activities" :activity="activity" />
+      <day v-for="activity in activities" :activity="activity" />
     </ul>
   </main>
-  <bg />
+  <!-- <bg /> -->
 </template>
 
 <style lang="scss" scoped>
@@ -27,19 +27,17 @@
     overflow-x: auto;
   }
 
-  ul {
+  ul.days {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-content: center;
     position: relative;
-    margin-top: 24rem;
+    /* margin-top: 24rem; */
     padding: 0rem 4rem;
     height: 50vh;
     cursor: cell;
-    /* cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png"),
-      auto; */
   }
 
   .cursor {
