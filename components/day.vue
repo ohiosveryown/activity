@@ -1,12 +1,16 @@
 <template>
-  <li class="day">
+  <li
+    class="day"
+    @mouseenter="handleHover(true)"
+    @mouseleave="handleHover(false)"
+  >
     <div class="graph"></div>
     <div
       ref="marker"
       class="marker"
       :style="{ height: activity.duration * 0.2 + 'vh' }"
     />
-    <div ref="date" class="debug date mono">{{ activity.date }}</div>
+    <div ref="date" class="date mono">{{ activity.date }}</div>
   </li>
 </template>
 
@@ -54,7 +58,7 @@
     position: absolute;
     bottom: -2.4rem;
     width: max-content;
-    opacity: 1;
+    opacity: 0;
     text-transform: uppercase;
     color: var(--charcoal);
     font-size: 1.4rem;
@@ -79,22 +83,20 @@
 
       handleHover(isHovering, inputDate) {
         const marker = this.$refs.marker
-        const header = this.$refs.header
         const date = this.$refs.date
-        const background = this.$refs.background
 
         const height = this.activity.duration * 0.2 + "vh"
 
         if (isHovering) {
-          marker.style.cssText = `height: 100%; background: var(--gradientVolt);`
-          header.style.cssText = `opacity: 1; transform: scale(1);`
-          date.style.cssText = `opacity: 1; transform: scale(1);`
-          background.style.cssText = `opacity: 1; transform: scale(1); transition: all 800ms ease`
+          if (marker.offsetHeight > 30) {
+            marker.style.cssText = `height: 100%; background: var(--rm);`
+            date.style.cssText = `opacity: 1; transform: scale(1);`
+          } else {
+            marker.style.cssText = `height: 100%; background: var(--night);`
+          }
         } else {
-          marker.style.cssText = `height: ${height}; background: var(--gradientCharcoal);`
-          header.style.cssText = `opacity: 0; transform: scale(.4);`
+          marker.style.cssText = `height: ${height}; background: var(--oil);`
           date.style.cssText = `opacity: 0; transform: scale(.9);`
-          background.style.cssText = `opacity: 0; transform: scale(.9);`
           if (marker.offsetHeight < 30) {
             marker.style.background = "var(--night)"
           }

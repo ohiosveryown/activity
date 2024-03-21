@@ -10,7 +10,7 @@
       <day v-for="activity in activities" :activity="activity" />
     </ul>
   </main>
-  <!-- <bg /> -->
+  <bg />
 </template>
 
 <style lang="scss" scoped>
