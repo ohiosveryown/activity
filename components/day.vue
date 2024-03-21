@@ -76,9 +76,8 @@
     methods: {
       markerColor() {
         const marker = this.$refs.marker
-        if (marker.offsetHeight < 30) {
-          marker.style.background = "var(--night)"
-        }
+        marker.style.background =
+          marker.offsetHeight < 30 ? "var(--night)" : marker.style.background
       },
 
       handleHover(isHovering, inputDate) {
@@ -87,19 +86,20 @@
 
         const height = this.activity.duration * 0.2 + "vh"
 
-        if (isHovering) {
-          if (marker.offsetHeight > 30) {
-            marker.style.cssText = `height: 100%; background: var(--rm);`
-            date.style.cssText = `opacity: 1; transform: scale(1);`
-          } else {
-            marker.style.cssText = `height: 100%; background: var(--night);`
-          }
-        } else {
-          marker.style.cssText = `height: ${height}; background: var(--oil);`
-          date.style.cssText = `opacity: 0; transform: scale(.9);`
-          if (marker.offsetHeight < 30) {
-            marker.style.background = "var(--night)"
-          }
+        marker.style.cssText = isHovering
+          ? marker.offsetHeight > 30
+            ? `height: 100%; background: var(--rm);`
+            : `height: 100%; background: var(--night);`
+          : `height: ${height}; background: var(--oil);`
+
+        date.style.cssText = isHovering
+          ? marker.offsetHeight > 30
+            ? `opacity: 1; transform: scale(1);`
+            : date.style.cssText
+          : `opacity: 0; transform: scale(.9);`
+
+        if (!isHovering && marker.offsetHeight < 30) {
+          marker.style.background = "var(--night)"
         }
       },
     },
