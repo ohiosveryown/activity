@@ -157,20 +157,13 @@ export const activities = [
   },
 ]
 
-// get the last activity
+// loop through rest of year
 let lastActivity = activities[activities.length - 1]
-
-// parse the date
-let lastActivityDate = new Date(lastActivity.date + ", 2024") // add a year, any year, to make it a valid Date
-
-// extract the month and day
-let lastMonth = lastActivityDate.getMonth() // getMonth returns month index starting from 0
-let lastDay = lastActivityDate.getDate() // getDate returns the day of the month
-
-// set the start date to the day after the last activity
+let lastActivityDate = new Date(lastActivity.date + ", 2024")
+let lastMonth = lastActivityDate.getMonth()
+let lastDay = lastActivityDate.getDate()
 let startDate = new Date(2024, lastMonth, lastDay + 1)
 
-// loop through the rest of the year
 while (startDate.getFullYear() === 2024) {
   activities.push({
     date: startDate.toLocaleDateString("en-US", {
@@ -183,7 +176,5 @@ while (startDate.getFullYear() === 2024) {
     unit: "",
     secondary: "",
   })
-
-  // Increment by one day
   startDate.setDate(startDate.getDate() + 1)
 }

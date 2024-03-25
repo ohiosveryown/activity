@@ -1,5 +1,6 @@
 <template>
   <div ref="cursor" :class="{ active: hover }" class="cursor mono" />
+  <div ref="totals" class="totals" />
   <main>
     <ul
       ref="ul"
@@ -96,10 +97,31 @@
           )
         })
       },
+
+      totals() {
+        const totals = this.$refs.totals
+        // get total active time
+        let totalPrimary = activities.reduce((total, activity) => {
+          if (typeof activity.primary === "number") {
+            return total + activity.primary
+          } else {
+            return total
+          }
+        }, 0)
+
+        // total active time to hours + minutes
+        let totalMinutes = totalPrimary // replace with your total minutes
+        let hours = Math.floor(totalMinutes / 60)
+        let minutes = totalMinutes % 60
+
+        totals.innerText = `Total activity: ${hours} hours and ${minutes} minutes.`
+        console.log(`Total time is ${hours} hours and ${minutes} minutes.`)
+      },
     },
 
     mounted() {
       this.handleCursor()
+      this.totals()
     },
   }
 </script>
