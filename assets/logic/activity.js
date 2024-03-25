@@ -148,11 +148,6 @@ export const activities = [
     secondary: "2.4mi",
   },
   {
-    month: 1,
-    day: 19,
-    // month: months[0],
-    // day: 20,
-    //
     date: "Jan 19",
     icon: sport.run.icon,
     background: sport.run.tribble3,
@@ -161,42 +156,3 @@ export const activities = [
     secondary: "1.2mi",
   },
 ]
-
-// duration total
-// let totalDuration = activities.reduce(
-//   (total, activity) => total + activity.primary,
-//   0
-// )
-// console.log(totalDuration)
-
-// const mostRecentActivity = activities.sort(
-//   (a, b) => new Date(b.date) - new Date(a.date)
-// )[0]
-// console.log(mostRecentActivity.date) // Output: Most recent date
-
-// last day
-let lastActivity = activities[activities.length - 1]
-let lastMonth = lastActivity.month
-let lastDay = lastActivity.day
-let startDate = new Date()
-
-startDate.setMonth(lastMonth - 1)
-startDate.setDate(lastDay + 1)
-
-while (startDate.getFullYear() === new Date().getFullYear()) {
-  // check if the current year is the same
-  activities.push({
-    date: startDate.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-    }), // format date to 'MMM d'
-    icon: "",
-    background: "",
-    primary: "",
-    unit: "",
-    secondary: "",
-  })
-
-  // Increment by one day
-  startDate.setDate(startDate.getDate() + 1)
-}
