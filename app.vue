@@ -34,7 +34,7 @@
     justify-content: flex-start;
     align-content: center;
     position: relative;
-    /* margin-top: 24rem; */
+    margin-top: 8rem;
     padding: 0rem 4rem;
     height: 50vh;
     cursor: cell;
