@@ -1,5 +1,6 @@
 <template>
   <cursor :class="{ hide: hover }" />
+  <logotype @mouseenter="hover = true" @mouseleave="hover = false" />
   <totals @mouseenter="hover = true" @mouseleave="hover = false" />
   <main>
     <ul

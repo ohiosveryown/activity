@@ -48,14 +48,17 @@
   }
 
   menu {
+    display: none;
     position: absolute;
     top: 0;
     right: 2rem;
-    display: flex;
     flex-direction: column;
     align-items: flex-end;
     text-justify: right;
     gap: 8px;
+    @include breakpoint(md) {
+      display: flex;
+    }
   }
 
   .children {
@@ -69,7 +72,11 @@
   }
 
   .label {
+    display: none;
     opacity: 0;
+    @include breakpoint(mdl) {
+      display: inline;
+    }
   }
 
   .active {

@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="overlay" />
+      <div v-if="activity.background" class="overlay" />
 
       <NuxtImg
         provider="imagekit"
