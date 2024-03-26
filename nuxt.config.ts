@@ -4,10 +4,16 @@ export default defineNuxtConfig({
 
   // global styles
   css: [
-    "~/public/style/reset.scss",
-    "~/public/style/type.scss",
-    "~/public/style/util.scss",
+    "~/assets/style/reset.scss",
+    "~/assets/style/type.scss",
+    "~/assets/style/util.scss",
   ],
 
   modules: ["@nuxt/image"],
+
+  image: {
+    imagekit: {
+      baseURL: "https://ik.imagekit.io/ohiosveryown/",
+    },
+  },
 })
