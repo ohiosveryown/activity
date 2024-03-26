@@ -16,5 +16,7 @@
       no-repeat center center;
     background-size: cover;
     pointer-events: none;
+
+    opacity: 0;
   }
 </style>

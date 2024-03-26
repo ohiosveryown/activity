@@ -5,9 +5,7 @@
     @mouseleave="handleHover(false)"
   >
     <div ref="graph" class="graph">
-      <div v-if="activity.icon" class="icon">
-        <img :src="activity.icon" />
-      </div>
+      <div v-if="activity.icon" v-html="activity.icon" class="icon" />
 
       <div ref="activity" class="activity">
         <div v-if="activity.primary" ref="primary" class="primary sans">
@@ -124,7 +122,7 @@
 
   .primary {
     font-size: 3.6rem;
-    line-height: 1.1;
+    line-height: 1.2;
     letter-spacing: 0.75px;
     background: linear-gradient(
       180deg,
