@@ -1,6 +1,6 @@
 <template>
   <cursor :class="{ hide: hover }" />
-  <totals />
+  <totals @mouseenter="hover = true" @mouseleave="hover = false" />
   <main>
     <ul
       ref="ul"
