@@ -1,28 +1,22 @@
 <template>
   <menu class="mono">
     <li>
-      <span class="context">Total activity: </span>
-      <button @click="showMenu = !showMenu" class="mono">
+      <span :class="{ active: showLabel }" class="label">Total activity: </span>
+      <button
+        @mouseenter="showLabel = true"
+        @mouseleave="showLabel = false"
+        @click="showMenu = !showMenu"
+        class="mono"
+      >
         {{ totalHours }} hours and {{ totalMinutes }} minutes
         <span class="icon" v-if="showMenu">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-            fill="none"
-          >
-            <path fill="#A5A5A5" d="M1 6.5h10v1H1v-1Z" />
+          <svg width="12" height="12" fill="none">
+            <path d="M1 6.5h10v1H1v-1Z" />
           </svg>
         </span>
         <span class="icon" v-else>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-            fill="none"
-          >
+          <svg width="12" height="12" fill="none">
             <path
-              fill="#A5A5A5"
               fill-rule="evenodd"
               d="M6.5 6.5v-4h-1v4H1v1h4.5v4h1v-4H11v-1H6.5Z"
               clip-rule="evenodd"
@@ -72,7 +66,10 @@
     gap: 4px;
     opacity: 0;
     pointer-events: none;
-    /* transition: all 150ms ease; */
+  }
+
+  .label {
+    opacity: 0;
   }
 
   .active {
@@ -88,6 +85,10 @@
     margin-right: 0.5rem;
     margin-left: 0rem;
   }
+
+  svg path {
+    fill: var(--charcoal);
+  }
 </style>
 
 <script>
@@ -95,6 +96,7 @@
   export default {
     data: () => ({
       showMenu: false,
+      showLabel: false,
       activities,
       totalHours: 0,
       totalMinutes: 0,
@@ -116,12 +118,10 @@
         this.totalHours = Math.floor(totalPrimary / 60)
         this.totalMinutes = totalPrimary % 60
 
-        // bball days
         let totalBballDays = activities.filter((activity) =>
           activity.secondary.endsWith("c")
         ).length
 
-        // get total miles, calories, and rest days
         let totalMiles = 0
         let totalCalories = 0
         let totalRestDays = 0
@@ -141,10 +141,6 @@
         this.$refs.miles.innerText = `${totalMiles} mi`
         this.$refs.bball.innerText = `${totalBballDays} days`
         this.$refs.rest.innerText = `${totalRestDays} days`
-
-        console.log(`Total miles: ${totalMiles}`)
-        console.log(`Total bball days: ${totalBballDays}`)
-        console.log(`Total rest days: ${totalRestDays}`)
       },
     },
 
