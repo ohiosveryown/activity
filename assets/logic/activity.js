@@ -1,7 +1,5 @@
 import { sport } from "assets/logic/variables.js"
 
-const months = ["Jan", "Feb"]
-
 export const activities = [
   {
     date: "Jan 1",

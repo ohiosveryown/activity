@@ -1,6 +1,6 @@
 <template>
-  <div ref="cursor" :class="{ active: hover }" class="cursor mono" />
-  <div ref="totals" class="totals" />
+  <cursor :class="{ hide: hover }" />
+  <totals />
   <main>
     <ul
       ref="ul"
@@ -41,29 +41,7 @@
     cursor: cell;
   }
 
-  .cursor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-align: center;
-    text-transform: uppercase;
-    color: var(--charcoal);
-    font-size: 1.4rem;
-    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-    transition-duration: 800ms;
-    will-change: transform, opacity;
-  }
-
-  @keyframes enter {
-    from {
-      opcity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  .active {
+  .hide {
     opacity: 0;
   }
 </style>
@@ -75,53 +53,5 @@
       activities,
       hover: false,
     }),
-
-    methods: {
-      handleCursor() {
-        // date logic
-        const now = new Date()
-        const date = now.getDate()
-        const months = Array.from({ length: 12 }, (v, i) => {
-          return new Date(0, i).toLocaleString("en-US", { month: "short" })
-        })
-
-        const month = months[now.getMonth()]
-        const cursor = this.$refs.cursor
-        cursor.innerText = month + " " + date
-
-        // follow logic
-        document.addEventListener("mousemove", (e) => {
-          cursor.setAttribute(
-            "style",
-            `transform: translate(${e.pageX - 22}px, ${e.pageY - 28}px)`
-          )
-        })
-      },
-
-      totals() {
-        const totals = this.$refs.totals
-        // get total active time
-        let totalPrimary = activities.reduce((total, activity) => {
-          if (typeof activity.primary === "number") {
-            return total + activity.primary
-          } else {
-            return total
-          }
-        }, 0)
-
-        // total active time to hours + minutes
-        let totalMinutes = totalPrimary // replace with your total minutes
-        let hours = Math.floor(totalMinutes / 60)
-        let minutes = totalMinutes % 60
-
-        totals.innerText = `Total activity: ${hours} hours and ${minutes} minutes.`
-        console.log(`Total time is ${hours} hours and ${minutes} minutes.`)
-      },
-    },
-
-    mounted() {
-      this.handleCursor()
-      this.totals()
-    },
   }
 </script>

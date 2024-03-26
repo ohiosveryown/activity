@@ -105,9 +105,6 @@
     height: 15rem;
     padding: 1rem 1rem 1.4rem;
     pointer-events: none;
-    /* border-radius: 17px;
-    overflow: hidden; */
-    /* clip-path: url(#squircleClip); */
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
     opacity: 0;
     transition: all 300ms ease 50ms;
@@ -121,7 +118,6 @@
     width: 32px;
     height: 32px;
     padding: 4px;
-    /* background: linear-gradient(160deg, #b2fd00 13%, #5a7d08 96%); */
     background: linear-gradient(160deg, #52534e 13%, #1f2b03 96%);
     box-shadow: 0px -1px 2px -1px rgba(60, 82, 8, 0.9) inset,
       0px 1.4px 2px -1px rgba(251, 255, 243, 1) inset,
@@ -189,7 +185,6 @@
     props: {
       activity: Object,
     },
-    data: () => ({}),
     methods: {
       markerColor() {
         const marker = this.$refs.marker
