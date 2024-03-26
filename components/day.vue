@@ -138,6 +138,10 @@
     }
   }
 
+  .unit {
+    margin-left: -0.4rem;
+  }
+
   .secondary {
     opacity: 0.72;
   }
