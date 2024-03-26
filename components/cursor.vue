@@ -21,31 +21,35 @@
 
 <script>
   export default {
+    data() {
+      return {
+        months: Array.from({ length: 12 }, (v, i) =>
+          new Date(0, i).toLocaleString("en-US", { month: "short" })
+        ),
+      }
+    },
     methods: {
-      handleCursor() {
-        // date logic
+      updateCursorText() {
         const now = new Date()
         const date = now.getDate()
-        const months = Array.from({ length: 12 }, (v, i) => {
-          return new Date(0, i).toLocaleString("en-US", { month: "short" })
-        })
-
-        const month = months[now.getMonth()]
+        const month = this.months[now.getMonth()]
         const cursor = this.$refs.cursor
         cursor.innerText = month + " " + date
-
-        // follow logic
-        document.addEventListener("mousemove", (e) => {
-          cursor.setAttribute(
-            "style",
-            `transform: translate(${e.pageX - 22}px, ${e.pageY - 28}px)`
-          )
-        })
+      },
+      moveCursor(e) {
+        const cursor = this.$refs.cursor
+        cursor.setAttribute(
+          "style",
+          `transform: translate(${e.pageX - 22}px, ${e.pageY - 28}px)`
+        )
       },
     },
-
     mounted() {
-      this.handleCursor()
+      this.updateCursorText()
+      document.addEventListener("mousemove", this.moveCursor)
+    },
+    beforeDestroy() {
+      document.removeEventListener("mousemove", this.moveCursor)
     },
   }
 </script>

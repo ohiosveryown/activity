@@ -26,6 +26,7 @@
         v-if="activity.background"
         class="background"
         :src="activity.background"
+        :alt="activity.alt"
         quality="80"
       />
     </div>
@@ -39,8 +40,6 @@
     </div>
     <div ref="date" class="date mono">{{ activity.date }}</div>
   </li>
-
-  <squircle />
 </template>
 
 <style lang="scss" scoped>
@@ -105,7 +104,6 @@
     height: 15rem;
     padding: 1rem 1rem 1.4rem;
     pointer-events: none;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
     opacity: 0;
     transition: all 300ms ease 50ms;
   }
@@ -154,6 +152,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
   }
 
   .overlay {

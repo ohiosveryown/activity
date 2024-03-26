@@ -26,9 +26,18 @@
       </button>
     </li>
     <ul :class="{ active: showMenu }" class="children">
-      <li><span ref="miles" /><span>🏃</span></li>
-      <li><span ref="bball" /><span>🏀</span></li>
-      <li><span ref="rest" /><span>🔋</span></li>
+      <li>
+        <span>{{ milesText }}</span
+        ><span>🏃</span>
+      </li>
+      <li>
+        <span>{{ bballText }}</span
+        ><span>🏀</span>
+      </li>
+      <li>
+        <span>{{ restText }}</span
+        ><span>🔋</span>
+      </li>
     </ul>
   </menu>
 </template>
@@ -110,44 +119,42 @@
       totalMiles: 0,
       totalCalories: 0,
       totalBballDays: 0,
+      milesText: "",
+      bballText: "",
+      restText: "",
     }),
 
     methods: {
       getTotals() {
-        let totalPrimary = activities.reduce((total, activity) => {
-          if (typeof activity.primary === "number") {
-            return total + activity.primary
-          } else {
-            return total
-          }
-        }, 0)
-
-        this.totalHours = Math.floor(totalPrimary / 60)
-        this.totalMinutes = totalPrimary % 60
-
-        let totalBballDays = activities.filter((activity) =>
-          activity.secondary.endsWith("c")
-        ).length
-
+        let totalPrimary = 0
         let totalMiles = 0
         let totalCalories = 0
         let totalRestDays = 0
+        let totalBballDays = 0
 
-        activities.forEach((activity) => {
+        for (let activity of activities) {
+          if (typeof activity.primary === "number") {
+            totalPrimary += activity.primary
+          }
+
           if (typeof activity.secondary === "string") {
+            let secondaryValue = parseFloat(activity.secondary)
             if (activity.secondary.endsWith("mi")) {
-              totalMiles += parseFloat(activity.secondary)
+              totalMiles += secondaryValue
             } else if (activity.secondary.endsWith("c")) {
-              totalCalories += parseFloat(activity.secondary)
+              totalCalories += secondaryValue
+              totalBballDays++
             } else if (activity.secondary === "Rest") {
               totalRestDays++
             }
           }
-        })
+        }
 
-        this.$refs.miles.innerText = `${totalMiles} mi`
-        this.$refs.bball.innerText = `${totalBballDays} days`
-        this.$refs.rest.innerText = `${totalRestDays} days`
+        this.totalHours = Math.floor(totalPrimary / 60)
+        this.totalMinutes = totalPrimary % 60
+        this.milesText = `${totalMiles} mi`
+        this.bballText = `${totalBballDays} days`
+        this.restText = `${totalRestDays} days`
       },
     },
 
